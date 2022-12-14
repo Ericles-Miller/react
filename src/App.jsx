@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { Header } from './components/Header';
-import Post from './post'
+import Post from './post';
 import './global.css';
+import styles from './App.module.css'
+import { Sidebar } from './components/Sidebar';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -9,10 +11,19 @@ function App() {
   return (
     <div>
       <Header />
-      <Post 
-        author='Ericles Miller'
-        content='fadsfdsfnlk hfsdhfskdljhf fhkjahfkjd fahsdkfhkj fass'
-      />
+      <div className={styles.wrapper}>
+        <Sidebar />
+        <main>
+          <Post
+            author='Ericles Miller'
+            content='Loren ffjsal fadfjs fajlfjds fafjdsalf '
+          />
+          <Post
+            author='Anna Luiza'
+            content='Loren ffjsal fadfjs fajlfjds fafjdsalf '
+          />
+        </main>
+      </div>
     </div>
     )
 }
