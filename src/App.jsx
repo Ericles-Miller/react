@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Header } from './components/Header';
 import Post from './post'
-import './style.css';
+import './global.css';
 
 function App() {
   const [count, setCount] = useState(0)
