@@ -8,3 +8,13 @@
     gap: 2rem; /* espcamento entre o sidebar e feed*/
     align-items: flex-start; /* forca alinha com o topo*/ 
 }
+
+
+@media (max-width: 768px) {
+    .wrapper{
+        grid-template-columns: 1fr;
+    }
+    html {
+        font-size: 87.5%;
+    }
+}
