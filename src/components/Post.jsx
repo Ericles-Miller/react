@@ -11,9 +11,9 @@ import { useState } from 'react';
  * content: string
  */
 export function Post({ author , publishedAt,content}) {
-
+  
   const [comments, setComments] = useState([  // useState to comments 
-    'Post legal!'
+    'Post legal!',
   ])
 
   const [newCommentText, setNewCommentText] = useState('')
@@ -38,6 +38,7 @@ export function Post({ author , publishedAt,content}) {
   }
 
   function handleNewCommentChange() {
+    event.target.setCustomValidity('')
    setNewCommentText(event.target.value);
   }
 
@@ -48,7 +49,12 @@ export function Post({ author , publishedAt,content}) {
 
     setComments(commentsWithoutDeletedOne);
   }
+
+  function handleNewCommentInvalid() {
+    event.target.setCustomValidity('this field is mandatory!')
+  }
   
+  const isNewCommentEmpty = newCommentText.length === 0
 
   return (
     <article className={styles.post}>
@@ -81,14 +87,18 @@ export function Post({ author , publishedAt,content}) {
           placeholder='Deixe um comentario'
           onChange={handleNewCommentChange}
           value={newCommentText}
+          onInvalid={handleNewCommentInvalid}
+          required
         />
         <footer>
-          <button type='submit'>Publicar</button>
+          <button type='submit' disabled={isNewCommentEmpty}>
+            Publish
+          </button>
         </footer>
       </form>
       <div className={styles.commentList}>
         {comments.map(comment => {
-          return <Comment key={comment} content={comment} onDeleteComment={deleteComment}/>
+          return <Comment key={comment} content={comment} onDeleteComment={deleteComment} />
         })}
       </div>
     </article>
