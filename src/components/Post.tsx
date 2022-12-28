@@ -1,16 +1,32 @@
-import styles from './Post.module.css';
+import styles from './post.module.css';
 import { Comment } from './Comment';
 import { Avatar } from './Avatar';
 import {format} from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { formatDistanceToNow } from 'date-fns/esm';
-import { useState } from 'react';
-/**
- * author { avatar_url : '' , name: '', role: ''}
- * publishedAt: Date
- * content: string
- */
-export function Post({ author , publishedAt,content}) {
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
+
+interface IAuthor {
+  author: string,
+  role: string, 
+  avatarUrl: string,
+  name: string
+}
+
+interface IContent {
+  type: 'paragraph' | 'link'
+  content: string
+}
+
+
+interface IPostProps{
+  author: IAuthor,
+  publishedAt: Date,
+  content: IContent[]
+}
+
+
+export function Post({ author ,publishedAt,content}: IPostProps) {
   
   const [comments, setComments] = useState([  // useState to comments 
     'Post legal!',
@@ -27,22 +43,22 @@ export function Post({ author , publishedAt,content}) {
     addSuffix: true,
   })
 
-  function handleCreateNewComment() {
+  function handleCreateNewComment(event: FormEvent) {
     event.preventDefault()
-    console.log(event.target.comment) // serve para verificar qual tipo de evento esta acontecendo 
-    const newCommentText = event.target.comment.value
+    // console.log(event.target.comment) // serve para verificar qual tipo de evento esta acontecendo 
+    // const newCommentText = event.target.comment.value
     
     // imutabilidade 
     setComments([...comments, newCommentText ])
     setNewCommentText('');
   }
 
-  function handleNewCommentChange() {
+  function handleNewCommentChange(event:ChangeEvent<HTMLTextAreaElement>) {
     event.target.setCustomValidity('')
    setNewCommentText(event.target.value);
   }
 
-  function deleteComment(commentToDelete) {
+  function deleteComment(commentToDelete:string) {
     const commentsWithoutDeletedOne = comments.filter(comments => {
       return comments !== commentToDelete;
     })
@@ -50,7 +66,7 @@ export function Post({ author , publishedAt,content}) {
     setComments(commentsWithoutDeletedOne);
   }
 
-  function handleNewCommentInvalid() {
+  function handleNewCommentInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
     event.target.setCustomValidity('this field is mandatory!')
   }
   

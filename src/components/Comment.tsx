@@ -3,7 +3,13 @@ import {Trash,ThumbsUp} from 'phosphor-react'
 import { Avatar } from './Avatar';
 import { useState } from 'react';
 
-export function Comment({content, onDeleteComment}) {
+interface ICommentProps {
+  content : string,
+  onDeleteComment: (comment: string) => void 
+}
+
+
+export function Comment({content, onDeleteComment}: ICommentProps) {
   
   const [likeCount, setLikeCount] = useState(0)
 
@@ -25,15 +31,16 @@ export function Comment({content, onDeleteComment}) {
         <div className={styles.CommentContent}>
           <header>
             <div className={styles.authorAndTime}>
-              <strong>Diego Antunes</strong>
-              <time title='11 de Maio de 2022' dateTime='2022-05-11 08:13:30'>Cerca de uma hora atrás 1h</time>
+              <strong>Pericles</strong>
+              <time title='11 de Maio de 2022' dateTime='2022-05-11 08:13:30'>Sou feio</time>
             </div>
 
-            <button onClick={handleDeleteComment} title='Deletar comentário'>
+            <button onClick={handleDeleteComment} title='busco diversao'>
               <Trash size={24} />
             </button>
           </header>
-          
+          <p>Sou conrno</p>
+          <div>Ai como to bandida</div>
           <p>{content} </p>
         </div> 
         <footer>
