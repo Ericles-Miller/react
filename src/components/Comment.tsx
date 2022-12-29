@@ -14,8 +14,6 @@ export function Comment({content, onDeleteComment}: ICommentProps) {
   const [likeCount, setLikeCount] = useState(0)
 
   function handleDeleteComment() {
-    console.log('deletar');
-
     onDeleteComment(content);
   }
 
@@ -31,16 +29,14 @@ export function Comment({content, onDeleteComment}: ICommentProps) {
         <div className={styles.CommentContent}>
           <header>
             <div className={styles.authorAndTime}>
-              <strong>Pericles</strong>
-              <time title='11 de Maio de 2022' dateTime='2022-05-11 08:13:30'>Sou feio</time>
+              <strong>Diego Antunes</strong>
+              <time title='11 de Maio de 2022' dateTime='2022-05-11 08:13:30'>CeO Rockets </time>
             </div>
 
-            <button onClick={handleDeleteComment} title='busco diversao'>
+            <button onClick={handleDeleteComment} title='Delete comment'>
               <Trash size={24} />
             </button>
           </header>
-          <p>Sou conrno</p>
-          <div>Ai como to bandida</div>
           <p>{content} </p>
         </div> 
         <footer>
