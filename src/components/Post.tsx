@@ -1,4 +1,4 @@
-import styles from './post.module.css';
+import styles from './Post.module.css';
 import { Comment } from './Comment';
 import { Avatar } from './Avatar';
 import {format} from 'date-fns';
